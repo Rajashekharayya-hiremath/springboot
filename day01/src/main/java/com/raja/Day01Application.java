@@ -1,13 +1,13 @@
-package com.raja.day01;
+package com.raja;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ControllerApplication {
+public class Day01Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ControllerApplication.class, args);
+		SpringApplication.run(Day01Application.class, args);
 	}
 
 }
