@@ -1,43 +1,38 @@
 package com.raja.controller;
 
 import com.raja.model.Student;
+import com.raja.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    List<Student> students = new ArrayList<>();
+    private final StudentService service;
+
+    public StudentController(StudentService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public List<Student> getAllStudents() {
-        return students;
+        return service.getAllStudents();
     }
 
     @PostMapping
     public String addStudent(@RequestBody Student student) {
-        students.add(student);
-        return "Student added successfully";
+        return service.addStudent(student);
     }
 
     @PutMapping("/{id}")
-    public String updateStudent(@PathVariable int id, @RequestBody Student updatedStudent) {
-        for (Student s : students) {
-            if (s.getId() == id) {
-                s.setName(updatedStudent.getName());
-                s.setCourse(updatedStudent.getCourse());
-                return "Student updated";
-            }
-        }
-        return "Student not found";
+    public String updateStudent(@PathVariable int id, @RequestBody Student student) {
+        return service.updateStudent(id, student);
     }
 
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable int id) {
-        students.removeIf(s -> s.getId() == id);
-        return "Student deleted";
+        return service.deleteStudent(id);
     }
 }
